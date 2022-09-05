@@ -8,6 +8,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> finalPrices(vector<int>& prices) {
+    
         vector<int> vec1;
         for(int i=0;i<prices.size();i++){
             for(int j=i+1;j<prices.size();j++){
