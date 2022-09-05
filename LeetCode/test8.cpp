@@ -16,6 +16,8 @@
 #include<stdio.h>
 #include<algorithm>
 #include<vector>
+#include<unordered_map>
+#include<unordered_set>
 #include<iostream>
 using namespace std;
 
@@ -29,65 +31,80 @@ typedef struct TreeNode {
   }*BiTree;
 
 class Solution {
-
-private:vector<vector<TreeNode*>> vec1;
-        int temp=0;
-
 public:
-     vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) 
-     {
-         dfs(root);
-
-     }
-    void CreateBiTree(BiTree &T)
-{
-
-    int ch;
-    cin>>ch;
-    if(ch==0) 
-	T=NULL;
-	else
-	{
-		T= new TreeNode;
-		if(!T) exit(0);
-		T->val=ch; 
-		CreateBiTree(T->left);  
-		CreateBiTree(T->right); 
-	}
-}
-
-    void PreOrderTraverse(BiTree &T)
-{   
-	if(T)//当结点不为空的时候执行
-	{  
-		cout<<T->val;  
-		PreOrderTraverse(T->left);//  
-		PreOrderTraverse(T->right);  
-	}  
-	else cout<<"";  
-}
-
-    int main() {
-        TreeNode* root;
-        CreateBiTree(root);
-        int n;
-        // findDuplicateSubtrees(root);
-        PreOrderTraverse(root);
-        return 0;
-
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        dfs(root);
+        return {repeat.begin(), repeat.end()};
     }
-    int dfs(TreeNode* root1){
-        TreeNode *p1,*p2;
-        if(root1!=nullptr) 
-        {
-        vec1[temp].push_back(root1);
-        dfs(root1->left);
-        dfs(root1->right);
+
+    string dfs(TreeNode* node) {
+        if (!node) {
+            return "";
         }
-        temp++;
+        string serial = to_string(node->val) + "(" + dfs(node->left) + ")(" + dfs(node->right) + ")";
+        if (auto it = seen.find(serial); it != seen.end()) {
+            repeat.insert(it->second);
+        }
+        else {
+            seen[serial] = node;
+        }
+        return serial;
+    }
+
+private:
+    unordered_map<string, TreeNode*> seen;
+    unordered_set<TreeNode*> repeat;
+};
+
+//     void CreateBiTree(BiTree &T)
+// {
+
+//     int ch;
+//     cin>>ch;
+//     if(ch==0) 
+// 	T=NULL;
+// 	else
+// 	{
+// 		T= new TreeNode;
+// 		if(!T) exit(0);
+// 		T->val=ch; 
+// 		CreateBiTree(T->left);  
+// 		CreateBiTree(T->right); 
+// 	}
+// }
+
+//     void PreOrderTraverse(BiTree &T)
+// {   
+// 	if(T)//当结点不为空的时候执行
+// 	{  
+// 		cout<<T->val;  
+// 		PreOrderTraverse(T->left);//  
+// 		PreOrderTraverse(T->right);  
+// 	}  
+// 	else cout<<"";  
+// }
+
+//     int main() {
+//         TreeNode* root;
+//         CreateBiTree(root);
+//         int n;
+//         // findDuplicateSubtrees(root);
+//         PreOrderTraverse(root);
+//         return 0;
+
+//     }
+//     int dfs(TreeNode* root1){
+//         TreeNode *p1,*p2;
+//         if(root1!=nullptr) 
+//         {
+//         vec1[temp].push_back(root1);
+//         dfs(root1->left);
+//         dfs(root1->right);
+//         }
+//         temp++;
 
 
         
 
-    }
-};
+//     }
+// };
