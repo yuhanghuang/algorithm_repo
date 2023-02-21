@@ -50,6 +50,6 @@ int main()
 	Solution sl;
 	sl.replaceSpace(inputStr, length);
 	cout << "输出字符串:\t" << inputStr << endl;
-	system("pause");
+	// system("pause");
 	return 0;
 }
