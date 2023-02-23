@@ -42,7 +42,7 @@ public:
         int last = 0;
         int pre = 0;
         int steps =0;
-        vector<int> maxn(time);
+        vector<int> maxn(time);//默认初始值为0
         for(int i=0;i<clips.size();i++)
         {
             if(clips[i][0]<time)
