@@ -4,7 +4,9 @@
 游戏一直持续到所有石子都被拿走。
 假设爱丽丝和鲍勃都发挥出最佳水平，返回爱丽丝可以得到的最大数量的石头。
 */
-
+#include<iostream>
+#include<vector>
+using namespace std;
 class Solution {
 public:
     int stoneGameII(vector<int>& piles) {
@@ -29,3 +31,10 @@ public:
         return (dp[0][1] + accumulate(piles.begin(), piles.end(), 0)) / 2;
     }
 };
+
+int main()
+{
+    vector<int> arr={5,3,4,5};
+    Solution sl;
+    
+}
