@@ -4,18 +4,18 @@
 #include<algorithm>
 using namespace std;
 
-int returnmax(vector<vector<int>>& grid,int s,int t)
-    {
-        int max1=0;
-        for(int i=s;i<=s+2;i++)
-        {
-            for(int j=t;j<=t+2;j++)
-            {
-                max1=max(max1,grid[i][j]);
-            }
-        }
-        return max1;
-    }
+// int returnmax(vector<vector<int>>& grid,int s,int t)
+//     {
+//         int max1=0;
+//         for(int i=s;i<=s+2;i++)
+//         {
+//             for(int j=t;j<=t+2;j++)
+//             {
+//                 max1=max(max1,grid[i][j]);
+//             }
+//         }
+//         return max1;
+//     }
 class Solution {
 public:
     vector<vector<int>> largestLocal(vector<vector<int>>& grid) {
@@ -28,6 +28,18 @@ public:
             }
         }
         return maxLocal;
+    }
+    int returnmax(vector<vector<int>>& grid,int s,int t)
+    {
+        int max1=0;
+        for(int i=s;i<=s+2;i++)
+        {
+            for(int j=t;j<=t+2;j++)
+            {
+                max1=max(max1,grid[i][j]);
+            }
+        }
+        return max1;
     }
 
     
