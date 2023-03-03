@@ -35,3 +35,33 @@ int main()
     vector<int> nums={1,2,3,4,5,1,5,1,2,6,1,8};
     cout<<sl.containsNearbyDuplicate(nums,7);
 }
+
+// emplace插入
+unordered_map<int, int> dict;
+	dict.emplace(1, 1);
+	dict.emplace(1, 2);
+	unordered_map<int, int>::iterator iter;
+	for (iter = dict.begin();iter != dict.end();iter++)
+	{
+		cout <<"key: " << iter->first << " value: " << iter->second << endl;
+	}
+
+//赋值插入
+unordered_map<int, int> dict;
+	dict[1]=1;
+	dict[1]=2;
+	unordered_map<int, int>::iterator iter;
+	for (iter = dict.begin();iter != dict.end();iter++)
+	{
+		cout <<"key: " << iter->first << " value: " << iter->second << endl;
+	}
+
+    //insert插入
+    unordered_map<int, int> dict;
+	dict.insert(pair<int,int>(1,1));
+	dict.insert(pair<int, int>(1, 2));
+	unordered_map<int, int>::iterator iter;
+	for (iter = dict.begin();iter != dict.end();iter++)
+	{
+		cout <<"key: " << iter->first << " value: " << iter->second << endl;
+	}
