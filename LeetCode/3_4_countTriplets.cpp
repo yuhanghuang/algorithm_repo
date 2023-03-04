@@ -54,10 +54,42 @@ public:
 //     }
 // };
 
+// 方法三
+/*
+二进制表示中，某些位置才可以是1，而其它位置不能是1
+如该数是 (100111)2 ，那么满足要求的二元组可以是 (100010)2或者 (000110)2，但不能是 (010001)2 。
+二进制枚举子集的步骤：
+
+记该数为x。我们用 sub 表示当前枚举到的子集。初始时 sub=x，因为 x 也是本身的子集；
+我们不断地令 sub=(sub−1) & x，其中 &表示按位与运算。这样我们就可以从大到小枚举 x 的所有子集。当 sub=0时枚举结束。
+
+*/
+class Solution2 {
+public:
+    int countTriplets(vector<int>& nums) {
+        vector<int> cnt(1 << 16);
+        for (int x: nums) {
+            for (int y: nums) {
+                ++cnt[x & y];
+            }
+        }
+        int ans = 0;
+        for (int x: nums) {
+            x = x ^ 0xffff;
+            for (int sub = x; sub; sub = (sub - 1) & x) {
+                ans += cnt[sub];
+            }
+            ans += cnt[0];
+        }
+        return ans;
+    }
+};
 
 int main()
 {
     vector<int> nums={1,2,3};
     Solution sl;
-    cout <<sl.countTriplets(nums);
+    Solution2 s2;
+    cout <<sl.countTriplets(nums)<<endl;
+    cout <<s2.countTriplets(nums);
 }
