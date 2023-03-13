@@ -10,48 +10,71 @@ https://leetcode.cn/problems/minimum-hours-of-training-to-win-a-competition/
 #include <iostream>  
 #include <vector>
 using namespace std;
+// class Solution {
+// public:
+//     int minNumberOfHours(int initialEnergy, int initialExperience, vector<int>& energy, vector<int>& experience) {
+//         int energycount = 0;
+//         int experiencecount = 0;
+//         int temp=0;
+//         for(int i=0;i<energy.size();i++)
+//         {
+//             if(initialEnergy>energy[i] && initialExperience>experience[i])
+//             {
+//                 initialEnergy=initialEnergy-energy[i];
+//                 initialExperience=initialExperience+experience[i];
+//             }
+//             else if(initialEnergy>energy[i] && initialExperience<=experience[i])
+//             {
+//                 temp=experience[i]-initialExperience+1;
+//                 experiencecount+=temp;
+//                 initialExperience=experience[i]+1;
+//                 initialEnergy=initialEnergy-energy[i];
+//                 initialExperience=initialExperience+experience[i];
+//             }
+//             else if(initialEnergy<=energy[i] && initialExperience>experience[i])
+//             {
+//                 temp=energy[i]-initialEnergy+1;
+//                 energycount+=temp;
+//                 initialEnergy=energy[i]+1;
+//                 initialEnergy=initialEnergy-energy[i];
+//                 initialExperience=initialExperience+experience[i];
+//             }
+//             else
+//             {
+//                 energycount+=energy[i]-initialEnergy+1;
+//                 experiencecount+=experience[i]-initialExperience+1;
+//                 initialEnergy+=energy[i]-initialEnergy+1;
+//                 initialExperience+=experience[i]-initialExperience+1;
+//                 initialEnergy=initialEnergy-energy[i];
+//                 initialExperience=initialExperience+experience[i];
+//             }
+//         }
+//         return energycount+experiencecount;
+//     }
+// };
+
+//方法二
+
 class Solution {
 public:
     int minNumberOfHours(int initialEnergy, int initialExperience, vector<int>& energy, vector<int>& experience) {
-        int energycount = 0;
-        int experiencecount = 0;
-        int temp=0;
-        for(int i=0;i<energy.size();i++)
-        {
-            if(initialEnergy>energy[i] && initialExperience>experience[i])
-            {
-                initialEnergy=initialEnergy-energy[i];
-                initialExperience=initialExperience+experience[i];
-            }
-            else if(initialEnergy>energy[i] && initialExperience<=experience[i])
-            {
-                temp=experience[i]-initialExperience+1;
-                experiencecount+=temp;
-                initialExperience=experience[i]+1;
-                initialEnergy=initialEnergy-energy[i];
-                initialExperience=initialExperience+experience[i];
-            }
-            else if(initialEnergy<=energy[i] && initialExperience>experience[i])
-            {
-                temp=energy[i]-initialEnergy+1;
-                energycount+=temp;
-                initialEnergy=energy[i]+1;
-                initialEnergy=initialEnergy-energy[i];
-                initialExperience=initialExperience+experience[i];
-            }
-            else
-            {
-                energycount+=energy[i]-initialEnergy+1;
-                experiencecount+=experience[i]-initialExperience+1;
-                initialEnergy+=energy[i]-initialEnergy+1;
-                initialExperience+=experience[i]-initialExperience+1;
-                initialEnergy=initialEnergy-energy[i];
-                initialExperience=initialExperience+experience[i];
+        int sum = 0;
+        for (int e : energy) {
+            sum += e;
+        }
+        int trainingHours = initialEnergy > sum ? 0 : sum + 1 - initialEnergy;
+        for (int e : experience) {
+            if (initialExperience <= e) {
+                trainingHours += 1 + (e - initialExperience);
+                initialExperience = 2 * e + 1;// 1 + (e - initialExperience)+initialExperience+e=2*e+1
+            } else {
+                initialExperience += e;
             }
         }
-        return energycount+experiencecount;
+        return trainingHours;
     }
 };
+
 
 int main()
 {
