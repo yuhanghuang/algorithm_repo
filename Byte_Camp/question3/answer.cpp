@@ -11,6 +11,7 @@ int dfs(int cur, int fa, int lastColor) {
         if (color == lastColor) continue;
         int tmp = val[color][cur];
         for (auto& y : w[cur]) {
+        // for (auto y : w[cur]) {
             if (y == fa) continue;
             tmp += dfs(y, cur, color);
         }
