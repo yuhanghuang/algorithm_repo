@@ -1,45 +1,3 @@
-#include<iostream>
-#include<string>
-#include<vector>
-using namespace std;
-class Solution {
-public:
-    vector<vector<int>> dp;
-
-    int f(int mask, const string &sn, int i, bool same) {
-        if (i == sn.size()) {
-            return 1;
-        }
-        if (!same && dp[i][mask] >= 0) {
-            return dp[i][mask];
-        }
-        int res = 0, t = same ? (sn[i] - '0') : 9;
-        for (int k = 0; k <= t; k++) {
-            if (mask & (1 << k)) {
-                continue;
-            }
-            res += f(mask == 0 && k == 0 ? mask : mask | (1 << k), sn, i + 1, same && k == t);
-        }
-        if (!same) {
-            dp[i][mask] = res;
-        }
-        return res;
-    }
-
-    int numDupDigitsAtMostN(int n) {
-        string sn = to_string(n);
-        dp.resize(sn.size(), vector<int>(1 << 10, -1));
-        return n + 1 - f(0, sn, 0, true);
-    }
-};
-
-int main()
-{
-    int n=20;
-    Solution sl;
-    cout<<sl.numDupDigitsAtMostN(n);
-}
-/*
 class Solution {
     int[][] memo;   // memo[i][mask]记录当前选择顺位为i，已选状态为mask时，构造第i位及后面位的合法方案数
     char[] s;
@@ -57,7 +15,7 @@ class Solution {
         hasNum:表示前面是否已经选择了数字，若选择了就为true(识别直接构造低位的情况)
         时间复杂度:O(1024*M*10) 空间复杂度:O(1024*M)
         记忆化DFS的时间复杂度=状态数*每一次枚举的情况数
-         
+         */
         s = String.valueOf(n).toCharArray();    // 转化为字符数组形式
         int m = s.length;
         memo = new int[m][1 << 10];     // i∈[0,m-1]，mask为一个10位二进制数
@@ -100,35 +58,3 @@ class Solution {
         return res;
     }
 }
-*/
-
-/*
-class Solution {
-public:
-    int numDupDigitsAtMostN(int n) {
-        auto s = to_string(n);
-        int m = s.length(), dp[m][1 << 10];
-        memset(dp, -1, sizeof(dp)); // -1 表示没有计算过
-        function<int(int, int, bool, bool)> f = [&](int i, int mask, bool is_limit, bool is_num) -> int {
-            if (i == m)
-                return is_num; // is_num 为 true 表示得到了一个合法数字
-            if (!is_limit && is_num && dp[i][mask] != -1)
-                return dp[i][mask];
-            int res = 0;
-            if (!is_num) // 可以跳过当前数位
-                res = f(i + 1, mask, false, false);
-            int up = is_limit ? s[i] - '0' : 9; // 如果前面填的数字都和 n 的一样，那么这一位至多填数字 s[i]（否则就超过 n 啦）
-            for (int d = 1 - is_num; d <= up; ++d) // 枚举要填入的数字 d
-                if ((mask >> d & 1) == 0) // d 不在 mask 中
-                    res += f(i + 1, mask | (1 << d), is_limit && d == up, true);
-            if (!is_limit && is_num)
-                dp[i][mask] = res;
-            return res;
-        };
-        return n - f(0, 0, true, false);
-    }
-};
-
-链接：https://leetcode.cn/problems/numbers-with-repeated-digits/solution/by-endlesscheng-c5vg/
-
-*/
