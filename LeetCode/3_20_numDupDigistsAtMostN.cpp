@@ -1,35 +1,63 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<stdlib.h>
+#include<string.h>
 using namespace std;
+// class Solution {
+// public:
+//     vector<vector<int>> dp;
+
+//     int f(int mask, const string &sn, int i, bool same) {
+//         if (i == sn.size()) {
+//             return 1;
+//         }
+//         if (!same && dp[i][mask] >= 0) {
+//             return dp[i][mask];
+//         }
+//         int res = 0, t = same ? (sn[i] - '0') : 9;
+//         for (int k = 0; k <= t; k++) {
+//             if (mask & (1 << k)) {
+//                 continue;
+//             }
+//             res += f(mask == 0 && k == 0 ? mask : mask | (1 << k), sn, i + 1, same && k == t);
+//         }
+//         if (!same) {
+//             dp[i][mask] = res;
+//         }
+//         return res;
+//     }
+
+//     int numDupDigitsAtMostN(int n) {
+//         string sn = to_string(n);
+//         dp.resize(sn.size(), vector<int>(1 << 10, -1));
+//         return n + 1 - f(0, sn, 0, true);
+//     }
+// };
+
 class Solution {
 public:
-    vector<vector<int>> dp;
-
-    int f(int mask, const string &sn, int i, bool same) {
-        if (i == sn.size()) {
-            return 1;
-        }
-        if (!same && dp[i][mask] >= 0) {
-            return dp[i][mask];
-        }
-        int res = 0, t = same ? (sn[i] - '0') : 9;
-        for (int k = 0; k <= t; k++) {
-            if (mask & (1 << k)) {
-                continue;
-            }
-            res += f(mask == 0 && k == 0 ? mask : mask | (1 << k), sn, i + 1, same && k == t);
-        }
-        if (!same) {
-            dp[i][mask] = res;
-        }
-        return res;
-    }
-
     int numDupDigitsAtMostN(int n) {
-        string sn = to_string(n);
-        dp.resize(sn.size(), vector<int>(1 << 10, -1));
-        return n + 1 - f(0, sn, 0, true);
+        auto s = to_string(n);
+        int m = s.length(), dp[m][1 << 10];
+        memset(dp, -1, sizeof(dp)); // -1 表示没有计算过
+        function<int(int, int, bool, bool)> f = [&](int i, int mask, bool is_limit, bool is_num) -> int {
+            if (i == m)
+                return is_num; // is_num 为 true 表示得到了一个合法数字
+            if (!is_limit && is_num && dp[i][mask] != -1)
+                return dp[i][mask];
+            int res = 0;
+            if (!is_num) // 可以跳过当前数位
+                res = f(i + 1, mask, false, false);
+            int up = is_limit ? s[i] - '0' : 9; // 如果前面填的数字都和 n 的一样，那么这一位至多填数字 s[i]（否则就超过 n 啦）
+            for (int d = 1 - is_num; d <= up; ++d) // 枚举要填入的数字 d
+                if ((mask >> d & 1) == 0) // d 不在 mask 中
+                    res += f(i + 1, mask | (1 << d), is_limit && d == up, true);
+            if (!is_limit && is_num)
+                dp[i][mask] = res;
+            return res;
+        };
+        return n - f(0, 0, true, false);
     }
 };
 
