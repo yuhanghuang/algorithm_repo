@@ -3,12 +3,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "algorithm_repo_97e93d70"
+        },
+        {
+            "type": "java",
             "name": "Attach",
             "request": "attach",
             "hostName": "localhost",
             "port": "<debug port of the debuggee>"
         },
-
         {
             "command": "npm start",
             "name": "Run npm start",
