@@ -48,7 +48,7 @@ public:
 int main()
 {
     Solution sl;
-    vector<int> stones={7,4,9};
+    vector<int> stones={6,5,4,3,10};
     sl.numMovesStonesII(stones);
 
 }
