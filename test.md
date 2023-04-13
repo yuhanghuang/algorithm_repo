@@ -5,3 +5,4 @@
 # vscode设置代理测试2
 # vscode设置代理测试3
 # vscode设置sock5代理测试4
+git config --global http.https://github.com.proxy socks5://127.0.0.1:10808
