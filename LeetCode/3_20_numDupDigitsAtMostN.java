@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    // f[l][r] 代表 i * (i + 1) * ... * (j - 1) * j
+    // f[l][r] 代表 i * (i + 1) * ... * (j - 1) * j 
     static int[][] f = new int[10][10];
 
     static {

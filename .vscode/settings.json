@@ -1,0 +1,15 @@
+{
+    "java.configuration.runtimes": [
+        {
+          "name": "JavaSE-17",
+          "path": "C:/Program Files/JetBrains/IntelliJ IDEA Community Edition 2023.1/jbr",
+        }
+      ],
+      "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "complex": "cpp"
+      }
+
+}
