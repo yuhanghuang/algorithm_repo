@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "algorithm_repo_4a6f3f90"
+        },
+        {
             "name": "(gdb) Launch",
             "preLaunchTask": "g++.exe build active file",
             "type": "cppdbg",

@@ -41,7 +41,7 @@ public:
         return ans;
     }
 
-    static bool compare2(vector<int>&a,vector<int>&b){
+     bool compare2(vector<int>&a,vector<int>&b){
       if(a[0]!=b[0]) 
         return a[0]<b[0];
       else 
