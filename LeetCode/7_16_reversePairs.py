@@ -28,7 +28,7 @@ class Solution:
         return merge_sort(nums,0,len(nums)-1)
 
 if __name__=="__main__":
-    nums=[7,5,6,4]
+    nums=[1,2,3,4,5,6,7,0]
     sl=Solution()
     print("*****")
     print(sl.reversePairs(nums))
