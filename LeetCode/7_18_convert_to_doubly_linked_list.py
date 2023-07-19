@@ -19,6 +19,6 @@ class Solution:
         if not root: return
         self.pre = None
         dfs(root)
-        self.head.left, self.pre.right = self.pre, self.head
+        # self.head.left, self.pre.right = self.pre, self.head   循环双向链表
         return self.head
 
