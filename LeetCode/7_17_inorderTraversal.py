@@ -23,7 +23,7 @@ class Solution:
         data.append(root.val)
         data.extend(self.inorderTraversal(root.right))
         return data
-    def postorderTraversal(self , root: TreeNode) -> List[int]:
+    def postorderTraversal(self , root: TreeNode) -> list[int]:
         if root==None:
             return []
         data=[]
