@@ -17,7 +17,7 @@ class TreeNode:
 
 
 class Solution:
-    def solve(self, preOrder: List[int], inOrder: List[int]) -> list[int]:
+    def solve(self, preOrder: list[int], inOrder: list[int]) -> list[int]:
         # write code here
         data1=self.build_tree(preOrder,inOrder)
         self.inorder_traversal(data1)
