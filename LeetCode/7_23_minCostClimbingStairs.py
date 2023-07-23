@@ -7,7 +7,7 @@ from math import cos
 # @return int整型
 #
 class Solution:
-    def minCostClimbingStairs(self , cost: List[int]) -> int:
+    def minCostClimbingStairs(self , cost: list[int]) -> int:
         # write code here
         dp=[]
         for _ in range(len(cost)+1):
