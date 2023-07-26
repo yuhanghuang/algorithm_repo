@@ -6,7 +6,7 @@
 # @return int整型
 #
 class Solution:
-    def minPathSum(self , matrix: List[List[int]]) -> int:
+    def minPathSum(self , matrix: list[list[int]]) -> int:
         # write code here
         dp=[[0]*len(matrix[0]) for _ in range(len(matrix))]
         # print(dp)
